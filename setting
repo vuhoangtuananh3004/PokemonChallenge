@@ -1,0 +1,55 @@
+compose init
+
+
+composer require phpoffice/phpspreadsheet
+
+
+
+
+FUTURE FEATURES: UPDATE EVOLUTION------------
+
+    // START POKEMON_EVOLUTION_TABLE
+    function pokemon_evolution_table()
+    {
+        $databaseName = "pokemon";
+        $tableName = "pokemon_evolution_table";
+        $query = "CREATE TABLE $databaseName.$tableName (
+            pokemon_id INT AUTO_INCREMENT PRIMARY KEY,
+            pokemon_name VARCHAR(50) NOT NULL,
+            evolution_to VARCHAR(50)
+                    )";
+        ($this->connect->query($query) === TRUE) ? "Table Created" : "";
+
+        $this->update_pokemon_evolution_to();
+    }
+    function update_pokemon_evolution_to()
+    {
+        // $query = "
+        // UPDATE pokemon.pokedex_table 
+        // SET evolution_to = ?
+        // WHERE pokemon_name = ?
+        // ";
+
+        $stmt = $this->connect->prepare("INSERT INTO pokemon.pokemon_evolution_table (pokemon_name,evolution_to ) VALUES (?, ?)");
+        for ($i = 1; $i < 700; $i++) {
+            $url = "https://pokeapi.co/api/v2/evolution-chain/{$i}/";
+            $response = file_get_contents($url);
+            // Check if the request was successful
+            if ($response !== false) {
+                // Process the API response
+                $data = json_decode($response, true);
+                // Access the retrieved data
+                if ($data !== null) {
+                    $pokemon_baby =  ucfirst($data['chain']['species']['name']);
+                    // Name of pokemon evolution to 
+                    $evolvesTo = $data['chain']['evolves_to'];
+                    $evolvesTo_name = ucfirst($evolvesTo[0]['species']['name']);
+                    if ($evolvesTo_name != '' && $pokemon_baby != '') {
+                        $stmt->bind_param("ss", $pokemon_baby, $evolvesTo_name);
+                        $stmt->execute();
+                    }
+                }
+            }
+        }
+    }
+    // END POKEMON_EVOLUTION_TABLE

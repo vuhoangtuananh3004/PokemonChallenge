@@ -1,0 +1,89 @@
+  // -------------------------START EVOLUTION CENTER------------------------
+
+
+
+
+
+// $(document).ready(function () {
+//   $.ajax({
+//     url: "pokemon_lab_action.php",
+//     type: "GET",
+//     data: {
+//       data: "get_duegon_map",
+//     },
+//     success: function (response) {
+//       var screenWidth = $(window).width() - 100;
+//       var screenHeight = $(window).height() - 300;
+//       var eachWidth = Math.floor(screenWidth / 10);
+
+//       let y = 50;
+//       let x = 50;
+//       //   PLAYER SECTION
+//       let players_coordination = dms.team_coordinate("player");
+
+//       // ENEMY SECTION
+//       let enemy_coordination = dms.team_coordinate("enemy");
+
+//       var data = JSON.parse(response);
+
+//       let player_poke = data[9].state_pokemons;
+//       let enemy_poke;
+
+
+//       data.map((value, index) => {
+//         var map_enemy = dms.random_enemy_on_map(x, y, value, index);
+//         y = Math.floor(Math.random() * (screenHeight + 1)) + 50;
+//         x += eachWidth;
+//         $("#duegon_map").append(map_enemy);
+//         // --------------------- CLICK EACH STATE IN MAP ---------------------
+//         $("#map" + index).click(() => {
+//           enemy_poke = value.state_pokemons;
+//           $("#player").empty();
+//           $("#enemy").empty();
+//           $("#battle_field").removeClass("hidden");
+//           $("#close_battle").click(() => {
+//             $("#battle_field").addClass("hidden");
+//           });
+
+//           players_coordination.map((coordination, index) => {
+//             let img_url = player_poke[index].data;
+//             let player_html = dms.player_html(
+//               index,
+//               coordination.bottom,
+//               coordination.left,
+//               img_url
+//             );
+//             $("#player").append(player_html);
+
+//             // PLAYER ACTION START HERE //
+//             $("#player_poke_" + index).click(() => {
+//               let poke = player_poke[index];
+//               console.log("====================================");
+//               console.log(poke);
+//               console.log("====================================");
+//             });
+//           });
+
+//           enemy_coordination.map((coordination, index) => {
+//             let img_url = enemy_poke[index].data;
+//             let enemy_html = dms.enemy_html(index, coordination.top, coordination.right, img_url)
+//             $("#enemy").append(enemy_html);
+
+//             // ENEMY ACTION HERE START HERE //
+//             $("#enemy_poke_" + index).click(() => {
+//               let poke = enemy_poke[index];
+//               console.log("====================================");
+//               console.log(poke);
+//               console.log("====================================");
+//             });
+
+//           });
+
+//         });
+//       });
+//     },
+//     error: function (xhr, status, error) {
+//       console.error(error);
+//     },
+//   });
+// });

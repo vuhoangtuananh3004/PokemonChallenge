@@ -1,0 +1,34 @@
+.atk_moveR {
+    animation: normalAtkMoveR 1s;
+}
+.atk_moveL {
+    animation: normalAtkMoveL 1s;
+}
+
+@keyframes normalAtkMoveR {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes normalAtkMoveL {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
